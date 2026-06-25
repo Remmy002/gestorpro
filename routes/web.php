@@ -25,9 +25,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
     Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
 
-    // Admin (temporal — se completa en Fase 3)
+    // Admin — solo rol admin
     Route::middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
         Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+        Route::post('/users/{user}/roles', [AdminUserController::class, 'assignRole'])->name('users.assignRole');
     });
 
 });
