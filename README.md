@@ -237,8 +237,3 @@ project_user (pivote N:M)
 ![Mensaje Flash](public/screenshots/flash-exito.png)
 ![Error 403](public/screenshots/error-403.png)
 ![Error 404](public/screenshots/error-404.png)
-
-| Administrador    | admin@gestorpro.com       | admin       |
-| Líder Demo       | lider@gestorpro.com       | lider       |
-| Colaborador Demo | colaborador@gestorpro.com | colaborador |
-| Invitado Demo    | invitado@gestorpro.com    | invitado    |
