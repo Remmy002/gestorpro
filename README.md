@@ -149,33 +149,36 @@ Además de los permisos por rol, el sistema aplica una segunda capa de autorizac
 - Un **comentario** solo puede ser eliminado por su **autor** o por el admin.
 
 ---
-
 ## Modelo de Datos
 
+```plaintext
 users
 ├── id, name, email, password
 ├── N:M projects (pivot: project_user → project_role)
 ├── 1:N tasks (assignee_id)
 └── 1:N comments
+
 projects
 ├── id, nombre, descripcion, estado, owner_id
 ├── 1:N tasks
 └── N:M users (pivot: project_user)
+
 tasks
 ├── id, titulo, descripcion, estado, prioridad, due_date
 ├── project_id (N:1 projects)
 ├── assignee_id (N:1 users)
 └── 1:N comments
+
 comments
 ├── id, cuerpo
 ├── user_id (N:1 users)
 └── task_id (N:1 tasks)
+
 project_user (pivote N:M)
 ├── project_id
 ├── user_id
 └── project_role (lider | colaborador | invitado)
-
----
+```
 
 ## Fases de Desarrollo
 
@@ -234,3 +237,8 @@ project_user (pivote N:M)
 ![Mensaje Flash](public/screenshots/flash-exito.png)
 ![Error 403](public/screenshots/error-403.png)
 ![Error 404](public/screenshots/error-404.png)
+
+| Administrador    | admin@gestorpro.com       | admin       |
+| Líder Demo       | lider@gestorpro.com       | lider       |
+| Colaborador Demo | colaborador@gestorpro.com | colaborador |
+| Invitado Demo    | invitado@gestorpro.com    | invitado    |
