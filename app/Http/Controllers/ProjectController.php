@@ -43,14 +43,25 @@ class ProjectController extends Controller
                          ->with('success', 'Proyecto creado correctamente.');
     }
 
-    public function show(Project $project)
+    public function show(Project $project, Request $request)
     {
         $this->authorize('view', $project);
 
-        $project->load(['owner', 'members', 'tasks.assignee', 'tasks.comments']);
-        $members = $project->members;
+        $query = $project->tasks()->with('assignee', 'comments');
 
-        return view('projects.show', compact('project', 'members'));
+        if ($request->filled('estado')) {
+            $query->where('estado', $request->estado);
+        }
+
+        if ($request->filled('prioridad')) {
+            $query->where('prioridad', $request->prioridad);
+        }
+
+        $tasks   = $query->latest()->paginate(10);
+        $members = $project->members;
+        $project->load('owner');
+
+        return view('projects.show', compact('project', 'members', 'tasks'));
     }
 
     public function edit(Project $project)
